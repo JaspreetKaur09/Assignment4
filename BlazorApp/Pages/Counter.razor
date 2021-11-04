@@ -1,0 +1,63 @@
+@page "/counter"
+
+<h1>Counter</h1>
+<strong>hello @value</strong>
+<br />
+<input placeholder="Enter your text" @onchange="@onChange" />
+<br />
+<p>Current count: @currentCount</p>
+
+
+
+<p>Increment Amount : @IncrementAmount</p>
+<h4>Highest score : @Highscore</h4>
+<button class="btn btn-success" @onclick="Increment">Increase</button><br/><br/>
+  
+<button class="btn btn-danger" @onclick="DecrementCount">Decrease</button>
+    
+<br /><br/>
+<button class="btn btn-primary" @onclick="IncrementCount">Counter</button>
+
+<button class="btn btn-primary" @onclick="Reset">Reset</button>
+
+@code {
+    private int currentCount = 0;
+    private int IncrementAmount = 0;
+    private int Highscore = 0;
+    private string value { get; set; }
+    private void onChange(Microsoft.AspNetCore.Components.ChangeEventArgs args)
+    {
+        value = (string)args.Value;
+    }
+
+    private void IncrementCount()
+    {
+        currentCount+=IncrementAmount;
+        if(Highscore < currentCount)
+        {
+            Highscore = currentCount;
+        }
+        
+    }
+    
+    private void Reset()
+    {
+        currentCount = 0;
+    }
+
+    private void Increment()
+    {
+        if(IncrementAmount < 20)
+        {
+            IncrementAmount++;
+        }
+    }
+
+    private void DecrementCount()
+    {
+        if(IncrementAmount > 1)
+        {
+            IncrementAmount--;
+        }
+    }
+}
